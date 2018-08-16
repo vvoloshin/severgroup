@@ -56,7 +56,7 @@ public class MainController {
                     } else if ((ENTRY_CREATE == kind)) {
                         Path newPath = ((WatchEvent<Path>) watchEvent)
                                 .context();
-                        LOGGER.debug("New incoming CSV file : " + newPath.getFileName());
+                        LOGGER.debug("New incoming CSV/XML file : " + newPath.getFileName());
                         convert(executorService, newPath);
                     }
                 }
@@ -72,10 +72,19 @@ public class MainController {
     }
 
     private void convert(ExecutorService executorService, Path newPath) {
-        PathMatcher matcher = FileSystems.getDefault().getPathMatcher("glob:*.csv");
-        if (matcher.matches(newPath.getFileName())) {
+        boolean confirm = false;
+        ReaderService<List<AvgRecord>> readtask = null;
+        PathMatcher matcherCsv = FileSystems.getDefault().getPathMatcher("glob:*.csv");
+        PathMatcher matcherXml = FileSystems.getDefault().getPathMatcher("glob:*.xml");
+        if (matcherCsv.matches(newPath.getFileName())) {
             LOGGER.debug("Directory has not converted file: " + newPath.getFileName());
-            ReaderService<List<AvgRecord>> readtask = new CsvReaderServiceImpl(READPATH.resolve(newPath.getFileName()));
+            readtask = new CsvReaderServiceImpl(READPATH.resolve(newPath.getFileName()));
+            confirm = true;
+        } else if (matcherXml.matches(newPath.getFileName())) {
+            readtask = new XmlReaderServiceImpl(READPATH.resolve(newPath.getFileName()));
+            confirm = true;
+        }
+        if (confirm) {
             Future<List<AvgRecord>> submit = executorService.submit(readtask);
             try {
                 while (true) {
@@ -86,6 +95,7 @@ public class MainController {
                             String outfilename = newPath.getFileName().toString();
                             WriterService csvtask = new CsvWriterServiceImpl(outfilename, avgRecords);
                             executorService.submit(csvtask);
+                            //write to xml out file
                             WriterService xmltask = new XmlWriterServiceImpl(outfilename, avgRecords);
                             executorService.submit(xmltask);
                             LOGGER.debug("Complete converting data from file: " + newPath.getFileName());

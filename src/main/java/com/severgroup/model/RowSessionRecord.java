@@ -3,10 +3,15 @@ package com.severgroup.model;
 
 import com.opencsv.bean.CsvBindByName;
 
+import javax.xml.bind.annotation.*;
 import java.util.Objects;
 import java.util.UUID;
 
-public class CsvRecord {
+@XmlRootElement(name = "rowrecord")
+@XmlType(propOrder = {"timestamp", "id", "url", "seconds"})
+@XmlAccessorType(XmlAccessType.FIELD)
+public class RowSessionRecord {
+    @XmlTransient
     @CsvBindByName(required = false)
     private UUID uuid;
 
@@ -22,24 +27,28 @@ public class CsvRecord {
     @CsvBindByName(column = "seconds")
     private long seconds;
 
-    public CsvRecord() {
+    public RowSessionRecord() {
         this.uuid = UUID.randomUUID();
     }
 
-    public CsvRecord(long timestamp, String userId, String url, long seconds) {
+    public RowSessionRecord(long timestamp, String id, String url, long seconds) {
         this();
         this.timestamp = timestamp;
-        this.id = userId;
+        this.id = id;
         this.url = url;
         this.seconds = seconds;
     }
 
-    public CsvRecord(CsvRecord csvRecordOriginal) {
+    public RowSessionRecord(RowSessionRecord rowSessionRecordOriginal) {
         this();
-        this.timestamp = csvRecordOriginal.getTimestamp();
-        this.id = csvRecordOriginal.getUserId();
-        this.url = csvRecordOriginal.getUrl();
-        this.seconds = csvRecordOriginal.getSeconds();
+        this.timestamp = rowSessionRecordOriginal.getTimestamp();
+        this.id = rowSessionRecordOriginal.getUserId();
+        this.url = rowSessionRecordOriginal.getUrl();
+        this.seconds = rowSessionRecordOriginal.getSeconds();
+    }
+
+    public String getId() {
+        return id;
     }
 
     public UUID getUuid() {
@@ -82,12 +91,12 @@ public class CsvRecord {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        CsvRecord csvRecord = (CsvRecord) o;
-        return timestamp == csvRecord.timestamp &&
-                seconds == csvRecord.seconds &&
-                Objects.equals(uuid, csvRecord.uuid) &&
-                Objects.equals(id, csvRecord.id) &&
-                Objects.equals(url, csvRecord.url);
+        RowSessionRecord rowSessionRecord = (RowSessionRecord) o;
+        return timestamp == rowSessionRecord.timestamp &&
+                seconds == rowSessionRecord.seconds &&
+                Objects.equals(uuid, rowSessionRecord.uuid) &&
+                Objects.equals(id, rowSessionRecord.id) &&
+                Objects.equals(url, rowSessionRecord.url);
     }
 
     @Override
@@ -97,7 +106,7 @@ public class CsvRecord {
 
     @Override
     public String toString() {
-        return "CsvRecord{" +
+        return "RowSessionRecord{" +
                 "timestamp=" + timestamp +
                 ", id='" + id + '\'' +
                 ", url='" + url + '\'' +

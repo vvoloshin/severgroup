@@ -1,4 +1,4 @@
-##CSV file handler
+##CSV/XML file handler
 
 |Technology|Badge|
 |:---------:|:----|
@@ -19,7 +19,8 @@
             config.properties
             /csvparsing
                         --/inbox
-                        --/outbox
+                        --/outboxcsv
+                        --/outboxxml
                         --/parsed
                         --/log
                         --/error
@@ -31,12 +32,13 @@
 
 ```$xslt
 dir.read=/home/starlord/csvparsing/inbox/
-dir.write=/home/starlord/csvparsing/outbox/
+dir.write=/home/starlord/csvparsing/outboxcsv/
+dir.write=/home/starlord/csvparsing/outboxxml/
 dir.error=/home/starlord/csvparsing/error/
 dir.parsed=/home/starlord/csvparsing/parsed/
 ``` 
 
-4. Put the "*.csv" file with header in dir ``inbox``, if the file is well converted, 
+4. Put the "*.csv/*.xml" file with header in dir ``inbox``, if the file is well converted, 
 the new file will be located in the ``outbox`` folder with the prefix "avg_", 
 the original file will be moved to the ``parsed`` folder. 
 If an error occurs during the conversion (e.g. incorrect file structure, it happens to everyone), 
@@ -47,7 +49,7 @@ Accordingly, application logs are written to the ``log`` folder.
 
 
 * in default, app run with UTC.Offset(+3 hour)
-* for those who want to try to convert *.csv in the resulting file we - has two files (regulartestfile.csv,
+* for those who want to try to convert "*.csv/*.xml" in the resulting file we - has two files (regulartestfile.csv,
 onerecordtwodates.csv), place them in ``inbox``, maybe something happens
 * in the process of work may occur "some" exceptions, 
 just do not pay attention to them, everything is fine, don`t panic
