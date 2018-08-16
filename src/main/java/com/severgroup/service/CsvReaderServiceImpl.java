@@ -15,18 +15,17 @@ import java.nio.file.Path;
 import java.time.*;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
-import java.util.concurrent.Callable;
 import java.util.stream.Collectors;
 
 import static com.severgroup.util.Config.ERRORPATH;
 import static com.severgroup.util.Config.READPATH;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
-public class CsvReaderService implements Callable<List<AvgRecord>> {
-    private final static Logger LOGGER = Logger.getLogger(CsvReaderService.class);
+public class CsvReaderServiceImpl implements ReaderService<List<AvgRecord>> {
+    private final static Logger LOGGER = Logger.getLogger(CsvReaderServiceImpl.class);
     private Path fileName;
 
-    public CsvReaderService(Path fileName) {
+    public CsvReaderServiceImpl(Path fileName) {
         this.fileName = fileName;
     }
 

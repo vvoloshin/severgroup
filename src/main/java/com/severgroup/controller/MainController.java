@@ -1,7 +1,8 @@
 package com.severgroup.controller;
 
-import com.severgroup.service.CsvReaderService;
+import com.severgroup.service.CsvReaderServiceImpl;
 import com.severgroup.service.CsvWriterServiceImpl;
+import com.severgroup.service.ReaderService;
 import com.severgroup.service.WriterService;
 import com.severgroup.to.AvgRecord;
 import com.severgroup.util.Config;
@@ -77,7 +78,8 @@ public class MainController {
         PathMatcher matcher = FileSystems.getDefault().getPathMatcher("glob:*.csv");
         if (matcher.matches(newPath.getFileName())) {
             LOGGER.debug("Directory has not converted file: " + newPath.getFileName());
-            Future<List<AvgRecord>> submit = executorService.submit(new CsvReaderService(READPATH.resolve(newPath.getFileName())));
+            ReaderService<List<AvgRecord>> readtask = new CsvReaderServiceImpl(READPATH.resolve(newPath.getFileName()));
+            Future<List<AvgRecord>> submit = executorService.submit(readtask);
             try {
                 while (true) {
                     if (submit.isDone()) {

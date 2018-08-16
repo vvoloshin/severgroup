@@ -13,7 +13,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 
-public class CsvReaderServiceTest {
+public class CsvReaderServiceImplTest {
     private final static String regularfile = Config.READPATH + "regular.csv";
     private final static String corrfilename = Config.READPATH + "corrupt.csv";
     private final static String splitrecord = Config.READPATH + "split.csv";
@@ -33,23 +33,23 @@ public class CsvReaderServiceTest {
     @Test
     public void regularCsvFileTest() {
         Path path = Paths.get(regularfile);
-        CsvReaderService csvReaderService = new CsvReaderService(path);
-        List<AvgRecord> call = csvReaderService.call();
+        CsvReaderServiceImpl csvReaderServiceImpl = new CsvReaderServiceImpl(path);
+        List<AvgRecord> call = csvReaderServiceImpl.call();
         Assert.assertEquals(TestData.regularList, call);
     }
 
     @Test
     public void corruptedCsvFileTest() {
         Path path = Paths.get(corrfilename);
-        CsvReaderService csvReaderService = new CsvReaderService(path);
-        Assert.assertNull(csvReaderService.call());
+        CsvReaderServiceImpl csvReaderServiceImpl = new CsvReaderServiceImpl(path);
+        Assert.assertNull(csvReaderServiceImpl.call());
     }
 
     @Test
     public void splitRecordForTwoDates() {
         Path path = Paths.get(splitrecord);
-        CsvReaderService csvReaderService = new CsvReaderService(path);
-        List<AvgRecord> call = csvReaderService.call();
+        CsvReaderServiceImpl csvReaderServiceImpl = new CsvReaderServiceImpl(path);
+        List<AvgRecord> call = csvReaderServiceImpl.call();
         Assert.assertEquals(TestData.splitBean, call);
     }
 
