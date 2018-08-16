@@ -9,7 +9,8 @@ import java.util.Properties;
 
 public class Config {
     public static Path READPATH;
-    public static Path WRITEPATH;
+    public static Path WRITECSVPATH;
+    public static Path WRITEXMLPATH;
     public static Path ERRORPATH;
     public static Path PARSEDPATH;
 
@@ -21,7 +22,8 @@ public class Config {
             } else {
                 prop.load(is);
                 READPATH = Paths.get(prop.getProperty("dir.read"));
-                WRITEPATH = Paths.get(prop.getProperty("dir.write"));
+                WRITECSVPATH = Paths.get(prop.getProperty("dir.writecsv"));
+                WRITEXMLPATH = Paths.get(prop.getProperty("dir.writexml"));
                 ERRORPATH = Paths.get(prop.getProperty("dir.error"));
                 PARSEDPATH = Paths.get(prop.getProperty("dir.parsed"));
             }

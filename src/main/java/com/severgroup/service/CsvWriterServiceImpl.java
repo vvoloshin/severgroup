@@ -5,6 +5,7 @@ import com.severgroup.to.AvgRecord;
 import com.severgroup.util.FileUtil;
 import org.apache.log4j.Logger;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStreamWriter;
 import java.nio.charset.StandardCharsets;
@@ -32,10 +33,12 @@ public class CsvWriterServiceImpl implements WriterService<AvgRecord> {
     }
 
     public void write() {
-        try (FileOutputStream fos = new FileOutputStream(Paths.get(WRITEPATH + "/avg_" + filename).toFile(), false);
+        File filetoout = Paths.get(WRITECSVPATH + "/avg_" + filename).toFile();
+        try (FileOutputStream fos = new FileOutputStream(filetoout, false);
              OutputStreamWriter osw = new OutputStreamWriter(fos, StandardCharsets.UTF_8);
              CSVWriter writer = new CSVWriter(osw, DEFAULT_SEPARATOR, NO_QUOTE_CHARACTER, NO_ESCAPE_CHARACTER, DEFAULT_LINE_END)
         ) {
+            LOGGER.debug("CSV Writer write out file to: " + filetoout);
             writer.writeNext(new String[]{"id", "url", "average"});
             Map<LocalDate, List<AvgRecord>> groupingCollect = new TreeMap<>(records.stream()
                     .collect(Collectors.groupingBy(AvgRecord::getDate)));
@@ -60,7 +63,7 @@ public class CsvWriterServiceImpl implements WriterService<AvgRecord> {
 
     @Override
     public void run() {
-        LOGGER.debug("Thread for write : " + Thread.currentThread().getName());
+        LOGGER.debug("Thread for write CSV out: " + Thread.currentThread().getName());
         write();
     }
 

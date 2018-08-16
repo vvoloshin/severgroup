@@ -1,13 +1,23 @@
 package com.severgroup.to;
 
+import javax.xml.bind.annotation.*;
 import java.time.LocalDate;
 import java.util.Objects;
 
+@XmlRootElement(name = "avgrecord")
+@XmlType(propOrder = {"userName", "url", "avgSeconds"})
+@XmlAccessorType(XmlAccessType.FIELD)
 public class AvgRecord {
+    @XmlTransient
     private LocalDate date;
+    @XmlElement(name = "id")
     private String userName;
     private String url;
+    @XmlElement(name = "average")
     private double avgSeconds;
+
+    public AvgRecord() {
+    }
 
     public AvgRecord(LocalDate date, String userName, String url, double avgSeconds) {
         this.date = date;
