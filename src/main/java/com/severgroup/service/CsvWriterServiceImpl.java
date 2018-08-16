@@ -20,18 +20,18 @@ import java.util.stream.Collectors;
 import static com.opencsv.ICSVWriter.*;
 import static com.severgroup.util.Config.*;
 
-public class CsvWriterService implements Runnable {
-    private final static Logger LOGGER = Logger.getLogger(CsvWriterService.class);
+public class CsvWriterServiceImpl implements WriterService<AvgRecord> {
+    private final static Logger LOGGER = Logger.getLogger(CsvWriterServiceImpl.class);
 
     private List<AvgRecord> records;
     private String filename;
 
-    public CsvWriterService(String filename, List<AvgRecord> records) {
+    public CsvWriterServiceImpl(String filename, List<AvgRecord> records) {
         this.records = records;
         this.filename = filename;
     }
 
-    private void write() {
+    public void write() {
         try (FileOutputStream fos = new FileOutputStream(Paths.get(WRITEPATH + "/avg_" + filename).toFile(), false);
              OutputStreamWriter osw = new OutputStreamWriter(fos, StandardCharsets.UTF_8);
              CSVWriter writer = new CSVWriter(osw, DEFAULT_SEPARATOR, NO_QUOTE_CHARACTER, NO_ESCAPE_CHARACTER, DEFAULT_LINE_END)

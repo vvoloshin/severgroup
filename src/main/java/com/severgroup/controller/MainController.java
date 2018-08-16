@@ -1,7 +1,8 @@
 package com.severgroup.controller;
 
 import com.severgroup.service.CsvReaderService;
-import com.severgroup.service.CsvWriterService;
+import com.severgroup.service.CsvWriterServiceImpl;
+import com.severgroup.service.WriterService;
 import com.severgroup.to.AvgRecord;
 import com.severgroup.util.Config;
 import com.severgroup.util.FileUtil;
@@ -82,7 +83,8 @@ public class MainController {
                     if (submit.isDone()) {
                         List<AvgRecord> avgRecords = submit.get();
                         if (avgRecords != null && avgRecords.size() != 0) {
-                            executorService.submit(new CsvWriterService(newPath.getFileName().toString(), avgRecords));
+                            WriterService task = new CsvWriterServiceImpl(newPath.getFileName().toString(), avgRecords);
+                            executorService.submit(task);
                             LOGGER.debug("Complete converting data from file: " + newPath.getFileName());
                         }
                         break;
