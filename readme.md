@@ -1,7 +1,11 @@
 ##CSV file handler
 
-[![Build Status](https://travis-ci.org/vvoloshin/severgroup.svg?branch=master)](https://travis-ci.org/vvoloshin/severgroup)
-[![codecov](https://codecov.io/gh/vvoloshin/severgroup/branch/master/graph/badge.svg)](https://codecov.io/gh/vvoloshin/severgroup)
+|Technology|Badge|
+|:---------:|:----|
+|Travis CI|[![Build Status](https://travis-ci.org/vvoloshin/severgroup.svg?branch=master)](https://travis-ci.org/vvoloshin/severgroup)|
+|jaCoCo|[![codecov](https://codecov.io/gh/vvoloshin/severgroup/branch/master/graph/badge.svg)](https://codecov.io/gh/vvoloshin/severgroup)|
+
+
 
 
 1. Download "csvhandler.jar" and "config.properties", put both of them in the same folder
