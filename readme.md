@@ -1,5 +1,7 @@
 ##CSV file handler
 
+[![Build Status](https://travis-ci.org/vvoloshin/severgroup.svg?branch=master)](https://travis-ci.org/vvoloshin/severgroup)
+
 1. Download "csvhandler.jar" and "config.properties", put both of them in the same folder
 
 2. Run "runme.sh" in your local directory, it will create a directory tree (by default, can be changed inside runme.sh script):
