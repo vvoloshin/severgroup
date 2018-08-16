@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<rowrecords>
+    <rowrecord>
+        <timestamp>1514791800</timestamp>
+        <id>Ivan</id>
+        <url>yandex.ru</url>
+        <seconds>162</seconds>
+    </rowrecord>
+    <rowrecord>
+        <timestamp>1514797200</timestamp>
+        <id>Ivan</id>
+        <url>yandex.ru</url>
+        <seconds>188</seconds>
+    </rowrecord>
+    <rowrecord>
+        <timestamp>1514826000</timestamp>
+        <id>Aizek</id>
+        <url>nasa.com</url>
+        <seconds>233</seconds>
+    </rowrecord>
+    <rowrecord>
+        <timestamp>1514840370</timestamp>
+        <id>Ivan</id>
+        <url>google.com</url>
+        <seconds>312</seconds>
+    </rowrecord>
+    <rowrecord>
+        <timestamp>1514878200</timestamp>
+        <id>Ivan</id>
+        <url>vc.ru</url>
+        <seconds>99</seconds>
+    </rowrecord>
+    <rowrecord>
+        <timestamp>1514881800</timestamp>
+        <id>Aizek</id>
+        <url>nasa.com</url>
+        <seconds>78</seconds>
+    </rowrecord>
+</rowrecords>

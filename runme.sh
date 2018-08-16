@@ -6,6 +6,7 @@ mkdir -p -- csvparsing/outboxxml
 mkdir -p -- csvparsing/parsed
 mkdir -p -- csvparsing/log
 mkdir -p -- csvparsing/error
+mkdir -p -- csvparsing/xsd
 
 #path-to-config-file:
 config=config.properties

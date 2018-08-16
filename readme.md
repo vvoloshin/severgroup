@@ -1,4 +1,4 @@
-##CSV/XML file handler
+## CSV/XML file handler
 
 |Technology|Badge|
 |:---------:|:----|
@@ -32,10 +32,11 @@
 
 ```$xslt
 dir.read=/home/starlord/csvparsing/inbox/
-dir.write=/home/starlord/csvparsing/outboxcsv/
-dir.write=/home/starlord/csvparsing/outboxxml/
+dir.writecsv=/home/starlord/csvparsing/outboxcsv/
+dir.writexml=/home/starlord/csvparsing/outboxxml/
 dir.error=/home/starlord/csvparsing/error/
 dir.parsed=/home/starlord/csvparsing/parsed/
+dir.xsd=/home/starlord/csvparsing/xsd/
 ``` 
 
 4. Put the "*.csv/*.xml" file with header in dir ``inbox``, if the file is well converted, 
@@ -53,7 +54,8 @@ Accordingly, application logs are written to the ``log`` folder.
 onerecordtwodates.csv), place them in ``inbox``, maybe something happens
 * in the process of work may occur "some" exceptions, 
 just do not pay attention to them, everything is fine, don`t panic
-
+* when you run the application, it generates an xsd schema for the output files in the ``xsd`` directory 
+(surprising, isn't it?)
 
 
 
