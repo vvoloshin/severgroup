@@ -8,9 +8,9 @@
 
 
 
-1. Download "csvhandler.jar" and "config.properties", put both of them in the same folder
+- Download "csvhandler.jar" and "config.properties", put both of them in the same folder
 
-2. Run "runme.sh" in your local directory, it will create a directory tree (by default, can be changed inside runme.sh script):
+- Run "runme.sh" in your local directory, it will create a directory tree (by default, can be changed inside runme.sh script):
 ```$xslt
 
 /somefolder
@@ -25,9 +25,7 @@
                         --/log
                         --/error
 ```
-
-
-3. If you still want to run the app, config the file "config.properties" (in accordance with paragraph 1) - in the same folder as the original jar and
+- If you still want to run the app, config the file "config.properties" (in accordance with paragraph 1) - in the same folder as the original jar and
  sh files, as default properties is (absolute path, not relative):
 
 ```$xslt
@@ -39,22 +37,29 @@ dir.parsed=/home/starlord/csvparsing/parsed/
 dir.xsd=/home/starlord/csvparsing/xsd/
 ``` 
 
-4. Put the "*.csv/*.xml" file with header in dir ``inbox``, if the file is well converted, 
+- Put the "*.csv/*.xml" file with header in dir ``inbox``, if the file is well converted, 
 the new file will be located in the ``outbox`` folder with the prefix "avg_", 
 the original file will be moved to the ``parsed`` folder. 
 If an error occurs during the conversion (e.g. incorrect file structure, it happens to everyone), 
 the source file will be moved to the ``error`` folder. 
 Accordingly, application logs are written to the ``log`` folder.
 
-5. For stop the application brutally and cold-bloodedly - kill his process (Ctr^C) and God help you
+- All file processing results (average records) are stored in the H2 database (memory), which is installed while 
+the application is running and then destroyed. Also, during the launch of the application, several test entries are
+ added to the database to show that it somehow works.
 
+- The database itself can be accessed at: ``http://localhost:8080/records``
+ and then find the desired entry by name. All this is possible thanks to the black magic of Spring Boot
 
-* in default, app run with UTC.Offset(+3 hour)
-* for those who want to try to convert "*.csv/*.xml" in the resulting file we - has two files (regulartestfile.csv,
+- For stop the application brutally and cold-bloodedly - kill his process (Ctr^C) and God help you
+
+optional:
+1. in default, app run with UTC.Offset(+3 hour)
+2. for those who want to try to convert "*.csv/*.xml" in the resulting file we - has two files (regulartestfile.csv,
 onerecordtwodates.csv), place them in ``inbox``, maybe something happens
-* in the process of work may occur "some" exceptions, 
+3. in the process of work may occur "some" exceptions, 
 just do not pay attention to them, everything is fine, don`t panic
-* when you run the application, it generates an xsd schema for the output files in the ``xsd`` directory 
+4. when you run the application, it generates an xsd schema for the output files in the ``xsd`` directory 
 (surprising, isn't it?)
 
 

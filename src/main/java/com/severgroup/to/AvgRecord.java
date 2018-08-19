@@ -1,37 +1,77 @@
 package com.severgroup.to;
 
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.*;
 import java.time.LocalDate;
 import java.util.Objects;
 
+
 @XmlRootElement(name = "avgrecord")
 @XmlType(propOrder = {"userName", "url", "avgSeconds"})
 @XmlAccessorType(XmlAccessType.FIELD)
+@Entity
+@Table(name = "avgrecords")
 public class AvgRecord {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @XmlTransient
-    private LocalDate date;
-    @XmlElement(name = "id")
+    @NotNull
+    @Column(name = "id")
+    private Long eid;
+
+    @XmlTransient
+    @NotNull
+    @Column(name = "date_session")
+    private LocalDate dateSession;
+
+    @XmlElement(name = "eid")
+    @NotNull
+    @Column(name = "user_name")
     private String userName;
+
+    @NotNull
+    @Column(name = "url")
     private String url;
+
     @XmlElement(name = "average")
+    @NotNull
+    @Column(name = "seconds")
     private double avgSeconds;
 
     public AvgRecord() {
     }
 
-    public AvgRecord(LocalDate date, String userName, String url, double avgSeconds) {
-        this.date = date;
+    public AvgRecord(LocalDate dateSession, String userName, String url, double avgSeconds) {
+        this.dateSession = dateSession;
         this.userName = userName;
         this.url = url;
         this.avgSeconds = avgSeconds;
     }
 
+    public LocalDate getDateSession() {
+        return dateSession;
+    }
+
+    public void setDateSession(LocalDate dateSession) {
+        this.dateSession = dateSession;
+    }
+
+    public Long getEid() {
+        return eid;
+    }
+
+    public void setEid(Long eid) {
+        this.eid = eid;
+    }
+
     public LocalDate getDate() {
-        return date;
+        return dateSession;
     }
 
     public void setDate(LocalDate date) {
-        this.date = date;
+        this.dateSession = date;
     }
 
     public String getUserName() {
@@ -64,20 +104,20 @@ public class AvgRecord {
         if (o == null || getClass() != o.getClass()) return false;
         AvgRecord avgRecord = (AvgRecord) o;
         return Double.compare(avgRecord.avgSeconds, avgSeconds) == 0 &&
-                Objects.equals(date, avgRecord.date) &&
+                Objects.equals(dateSession, avgRecord.dateSession) &&
                 Objects.equals(userName, avgRecord.userName) &&
                 Objects.equals(url, avgRecord.url);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(date, userName, url, avgSeconds);
+        return Objects.hash(dateSession, userName, url, avgSeconds);
     }
 
     @Override
     public String toString() {
         return "AvgRecord{" +
-                "date=" + date +
+                "date=" + dateSession +
                 ", userName='" + userName + '\'' +
                 ", url='" + url + '\'' +
                 ", avgSeconds=" + avgSeconds +

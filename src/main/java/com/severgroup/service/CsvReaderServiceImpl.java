@@ -20,7 +20,6 @@ import static java.nio.charset.StandardCharsets.UTF_8;
 
 public class CsvReaderServiceImpl extends AbstractReaderService {
     private final static Logger LOGGER = Logger.getLogger(CsvReaderServiceImpl.class);
-//    private Path fileName;
 
     public CsvReaderServiceImpl(Path fileName) {
         super(fileName);

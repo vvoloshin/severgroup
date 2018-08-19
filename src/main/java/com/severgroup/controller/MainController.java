@@ -5,6 +5,8 @@ import com.severgroup.to.AvgRecord;
 import com.severgroup.util.Config;
 import com.severgroup.util.FileUtil;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 
 import java.io.IOException;
 import java.nio.file.*;
@@ -19,8 +21,12 @@ import static com.severgroup.util.Config.READPATH;
 import static java.nio.file.StandardWatchEventKinds.ENTRY_CREATE;
 import static java.nio.file.StandardWatchEventKinds.OVERFLOW;
 
-public class MainController {
+@Controller
+public class MainController implements BusinessController {
     private final static Logger LOGGER = Logger.getLogger(MainController.class);
+
+    @Autowired
+    private AvgService service;
 
     public MainController() {
     }
@@ -98,6 +104,8 @@ public class MainController {
                             //write to xml out file
                             WriterService xmltask = new XmlWriterServiceImpl(outfilename, avgRecords);
                             executorService.submit(xmltask);
+                            //write to DB
+                            service.saveAll(avgRecords);
                             LOGGER.debug("Complete converting data from file: " + newPath.getFileName());
                         }
                         break;
