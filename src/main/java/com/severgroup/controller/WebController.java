@@ -38,4 +38,9 @@ public class WebController {
             return new ModelAndView("records_List", "recordsList", records);
         } else return new ModelAndView("notfound", "errorname", username);
     }
+
+    @GetMapping("/")
+    public ModelAndView redirect() {
+        return new ModelAndView("redirect:/records");
+    }
 }
