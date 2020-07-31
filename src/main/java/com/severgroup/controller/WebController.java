@@ -30,7 +30,7 @@ public class WebController {
     }
 
     //http://localhost:8080/records/get?username=Ivan
-    @GetMapping("/get{username}")
+    @GetMapping("/get/{username}")
     public ModelAndView search(@RequestParam("username") String username, ModelMap map) {
         List<AvgRecord> records = service.findByName(username);
         if (records != null && records.size() > 0) {
